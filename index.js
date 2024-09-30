@@ -1,27 +1,25 @@
-let display=document.getElementById('display');
+let display = document.getElementById('result');
 
-let buttons=Array.from(document.getElementsByClassName('button'));
+function appendNumber(number) {
+    display.value += number;
+}
 
-buttons.map(button=> {
-    button.addEventListener('click',(e) =>{
-       switch(e.target.innerText){
-        case 'C':
-        display.innerText='';
-        break;
-        case '←':
-            if(display.innerText){
-            display.innerText=display.innerText.slice(o,-1);
-       }
+function appendOperator(operator) {
+    display.value += ` ${operator} `;
+}
 
-       breake;
-       case '=':
-        try{
-display.innerText=eval(display.innerText);
-        }catch{
-            display.innerText='Error!';
-        }
-        default:
-            display.innerText += e.target.innerText;
-       }
-    });
-});
+function clearDisplay() {
+    display.value = '';
+}
+
+function deleteLast() {
+    display.value = display.value.slice(0, -1);
+}
+
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch (error) {
+        display.value = 'Error';
+    }
+}
